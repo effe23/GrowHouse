@@ -1,236 +1,148 @@
 
-# Smart Grow House Monitor
+# Building a Smart Grow House Monitor using Raspberry Pi Pico W
 
-## Name and Credentials
-Ek223yb
+**Name:** Efthimis, ek223yb
+
+---
 
 ## Project Overview
-The Smart Grow House Monitor is an IoT project designed to monitor and control the environment of a grow house. It utilizes various sensors to measure temperature, humidity, light, and soil moisture, and provides real-time data and control capabilities through a web interface. This project can be completed in approximately 10 hours, depending on familiarity with the technologies used.
+This project creates a smart grow house monitor using a Raspberry Pi Pico W. It monitors temperature, humidity, light intensity, and soil moisture, automating watering and displaying data on a Next.js dashboard for real-time monitoring. Approximately 5-7 hours to complete.
 
 ## Objective
-The primary objective of this project is to create a smart monitoring system for a grow house, enabling optimal growth conditions for plants. By gathering data on environmental factors and controlling grow lights and a water pump, the system aims to enhance plant growth efficiency and provide valuable insights into the growing process.
 
-### Why This Project?
-The choice to build this specific device stems from the need to automate and optimize plant care, reducing manual labor and increasing precision in maintaining ideal growing conditions.
+I'm building this device to merge my interests in IoT and agriculture. Forgetfulness in watering plants prompted me to seek a reliable solution. The goal is to automate plant care by monitoring and optimizing environmental conditions, aiming to improve efficiency and growth outcomes.
 
-### Purpose
-The Smart Grow House Monitor serves to automate plant care by continuously monitoring environmental conditions and providing data-driven insights for better decision-making. This can lead to improved plant health and yield.
+## Materials
 
-### Insights
-By analyzing data trends, users can adjust environmental factors to suit different plant species' needs, anticipate problems, and make informed decisions about watering and lighting schedules.
+**Materials Specifications and Costs:**
+| Item                   | Specifications                      | Cost          | Supplier              |
+|------------------------|--------------------------------------|---------------|---------------------|
+| Raspberry Pi Pico W    | Microcontroller with WiFi           | 109           | Electrokit     |
+| DHT11 Sensor           | Temperature & Humidity Sensor       | 49            | Electrokit     |
+| CdS Photoresistor      | Light Intensity Resistor            | 8             | Electrokit     |
+| Soil Moisture Sensor   | Soil Moisture Measurement           | 29            | Electrokit     |
+| Relay Module           | Controls high power devices         | 42            | Electrokit     |
+| RGB LED                | Multi-color LED                     | 20            | Electrokit     |
+| Jumper Wires           | Various lengths                     | 29            | Electrokit     |
+| Breadboard             | Prototyping board                   | 69            | Electrokit     |
+| Battery Holder         | 2x AA cabel connection              | 16            | Electrokit     |
+| Water Pump             | 3V Water Pump                       | 45            | Electrokit     |
+|              | Total Price                       |       416      |      |
 
-## Material
-### List of Materials
-- **Sensors**:
-  - Temperature and Humidity Sensor (DHT22)
-  - Light Sensor (TSL2561)
-  - Soil Moisture Sensor (Capacitive)
-- **Microcontroller**:
-  - ESP32 (for Wi-Fi connectivity)
-- **Additional Components**:
-  - LED Grow Lights
-  - Water Pump
-  - Breadboard and Jumper Wires
-  - Resistors (various)
-- **Software**:
-  - Node.js
-  - Next.js
-  - TailwindCSS
-  - DaisyUI
-
-### Sensor Specifications
-- **DHT22**: Measures temperature (-40 to 80°C) and humidity (0-100% RH) with high accuracy.
-- **TSL2561**: Digital light sensor providing a precise measurement of light intensity.
-- **Capacitive Soil Moisture Sensor**: Measures soil moisture level.
-
-### Purchase Information
-- **DHT22**: $10 from Amazon
-- **TSL2561**: $8 from Adafruit
-- **Soil Moisture Sensor**: $5 from eBay
-- **ESP32**: $12 from SparkFun
 
 ## Computer Setup
-### IDE and Tools
-- **IDE**: VSCode
-- **Programming Language**: Python for sensor integration and JavaScript/TypeScript for web development
-- **Frameworks and Libraries**: Next.js for the frontend, Express.js for backend API
+**IDE and Tools Used:**
+- **Thonny IDE**: For programming the Raspberry Pi Pico W with MicroPython
+- **Node.js**: Backend environment for the Next.js application
+- **Visual Studio Code**: For developing the Next.js dashboard
 
-### Setup Steps
-1. **Install Node.js**: Follow the [Node.js installation guide](https://nodejs.org/en/download/).
-2. **Clone the Repository**: `git clone https://github.com/your-repo/grow-house-monitor.git`
-3. **Install Dependencies**: 
-   ```bash
-   cd grow-house-monitor
-   npm install
-   ```
-4. **Setup ESP32**:
-   - Flash the firmware using the ESP32 tool
-   - Install necessary drivers and connect to the computer
-
+**Setup Steps:**
+1. **Install Thonny IDE**: Download and install Thonny from [thonny.org](https://thonny.org/).
+2. **Install Node.js**: Download and install Node.js from [nodejs.org](https://nodejs.org/).
+3. **Clone the Repository**: Clone the project repository to your local machine.
+4. **Install Dependencies**: Navigate to the project directory and run `npm install` to install all dependencies.
+5. **Flashing the Pico W**:
+   - Connect the Pico W to your computer via USB.
+   - Open Thonny IDE and select the Pico W as the interpreter.
+   - Upload the `Growhouse.py` script to the Pico W.
+6. **SMTP2GO setup**:
+   - Follow the instructions on their website.
+   - Get your email and password for the .env.local file.
+7. **MongoDB setup**
+   - Follow the instructions on their website.
+   - Get your MONGODB_URI for the .env.local file.
+8. **Creating the '.env.local' File**
+   - In the root directory of your project create a new file named '.env.local'.
+   - Open the '.env.local' file and add the following enviroment variables to the file, replacing the placeholder values with your own.
+```   
+SMTP2GO_USER=your_smtp2go_username
+SMTP2GO_PASS=your_smtp2go_password
+SENDER_EMAIL=your_smtp2go_email
+RECIPIENT_EMAIL=your_notification_email@example.com
+MONGODB_URI=your_mongodb_connection_string
+```
+   - Example '.env.local' file:
+```
+SMTP2GO_USER=my_smtp2go_user
+SMTP2GO_PASS=my_smtp2go_pass
+SENDER_EMAIL=myemail@example.com
+RECIPIENT_EMAIL=myemail@example.com
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/mydatabase?retryWrites=true&w=majority
+```
 ## Putting Everything Together
-### Circuit Diagram
-- Draw and include a circuit diagram showing the connections between the ESP32, sensors, grow lights, and the water pump.
+**Circuit Diagram:**
+- Connect the DHT11 sensor to GPIO15.
+- Connect the light sensor to ADC pin 27.
+- Connect the soil moisture sensor to ADC pin 26.
+- Connect the relay module to GPIO2.
+- Connect the RGB LED to GPIO17 (red), GPIO18 (green), and GPIO19 (blue).
 
-### Electrical Calculations
-- Ensure that the power supply can handle the total current draw from all connected components.
-- Use appropriate resistors to limit current to the LEDs.
+## Electrical Calculations
+### Disclaimer
+# This is an approximation. Do not rely solely on these calculations if you want to do this project. Please verify and control everything yourself to ensure safety and proper functioning of your project.
+
+| **Component**         | **Operating Voltage** | **Operating Current (mA)** | **Resistor Needed (Ohms)** | **Remarks**                          |
+|-----------------------|-----------------------|----------------------------|----------------------------|--------------------------------------|
+| Raspberry Pi Pico W   | 3.3V                  | -                          | -                          | Power supply for all components      |
+| DHT11 Sensor          | 3.3V-5V               | 2.5                        | -                          | Connect to GPIO pin                  |
+| CdS Photoresistor     | 3.3V                  | <1                         | -                          | Connect in series with a resistor    |
+| Soil Moisture Sensor  | 3.3V                  | 20                         | -                          | Connect to ADC pin                   |
+| Relay Module          | 3.3V-5V               | 70                         | -                          | Connect to GPIO pin with transistor  |
+| RGB LED (each color)  | 3.3V                  | 20 (each)                  | 100 (for each color)       | Use separate resistors for R, G, B   |
+| Water Pump            | 3V                    | 150                        | -                          | Connect via relay module             |
+
+### Total Current Calculation
+
+- **DHT11 Sensor**: 2.5mA
+- **CdS Photoresistor**: ~1mA
+- **Soil Moisture Sensor**: 20mA
+- **Relay Module**: 70mA
+- **RGB LED (all colors on)**: 60mA (20mA per color)
+- **Water Pump**: 150mA
+
+**Total Current = 2.5mA + 1mA + 20mA + 70mA + 60mA + 150mA = 303.5mA**
 
 ## Platform
-### Choice of Platform
-The system is built on a local server using Next.js, which provides real-time data updates and control capabilities. This choice allows for a scalable solution that can later be deployed to a cloud service for remote access.
+**Platform Choice:**
+- **Next.js**: Chosen for its ease of use in building responsive web applications and its excellent support for TypeScript and React.
+- **Local Hosting**: The dashboard is hosted locally for this project, but it can be scaled to a cloud-based solution in the future.
+- **Database**: Data is stored in a MongoDB instance, which allows for efficient querying and storage of time-series data.
 
-## The Code
-### Core Functionalities
-#### Sensor Data Handling (Growhouse.py)
-```python
-import time
-import machine
-import dht
-import tsl2561
-import soil_moisture
+### Transmitting the Data / Connectivity
 
-# Initialize sensors
-dht_sensor = dht.DHT22(machine.Pin(4))
-light_sensor = tsl2561.TSL2561()
-soil_sensor = soil_moisture.SoilMoisture(0)
+**How is the data transmitted to the internet or local server?**
 
-while True:
-    dht_sensor.measure()
-    temp = dht_sensor.temperature()
-    humidity = dht_sensor.humidity()
-    light = light_sensor.read()
-    soil_moisture = soil_sensor.read()
-    
-    # Send data to the server
-    send_data(temp, humidity, light, soil_moisture)
-    
-    time.sleep(2)
-```
-- This script collects data from the sensors and sends it to the server every 2 seconds.
+Data is transmitted from the Raspberry Pi Pico W to a local server using WiFi and HTTP POST requests. The process involves the following steps:
 
-#### API Endpoints
-**pages/api/sensor-data.ts**
-```typescript
-import type { NextApiRequest, NextApiResponse } from 'next';
+1. **Data Collection**: The Raspberry Pi Pico W gathers sensor readings (temperature, humidity, light intensity, and soil moisture).
+2. **WiFi Connection**: The device connects to the local WiFi network.
+3. **HTTP POST Request**: Sensor data is formatted into a JSON object and sent to the Next.js server using an HTTP POST request.
+4. **Server Processing**: The Next.js server receives the data, processes it, and stores it in a MongoDB database.
 
-interface SensorData {
-  temp: number[];
-  humidity: number[];
-  light: number[];
-  soil_moisture: number[];
-  timestamps: number[];
-}
+**How often is the data sent?**
 
-let sensorData: SensorData = {
-  temp: [],
-  humidity: [],
-  light: [],
-  soil_moisture: [],
-  timestamps: [],
-};
+Data is sent every 60 seconds to balance the need for real-time monitoring with power consumption.
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { temp, humidity, light, soil_moisture } = req.body;
-    const timestamp = Date.now();
+**Protocols Used:**
 
-    sensorData.temp.push(temp);
-    sensorData.humidity.push(humidity);
-    sensorData.light.push(light);
-    sensorData.soil_moisture.push(soil_moisture);
-    sensorData.timestamps.push(timestamp);
+- **WiFi**: For connecting the Raspberry Pi Pico W to the local network.
+  - **Advantages**: Reliable and widely available.
+  - **Considerations**: Power consumption is higher, but manageable with a stable power source.
+- **HTTP**: For transmitting sensor data to the Next.js server.
+  - **Advantages**: Simple to implement and integrates well with web applications.
+  - **Considerations**: Slightly less efficient than other protocols like MQTT, but suitable for the project's data transmission frequency.
 
-    // Keep only the latest 30 minutes of data
-    const THIRTY_MINUTES = 30 * 60 * 1000;
-    const cutoffTime = Date.now() - THIRTY_MINUTES;
-    while (sensorData.timestamps[0] < cutoffTime) {
-      sensorData.temp.shift();
-      sensorData.humidity.shift();
-      sensorData.light.shift();
-      sensorData.soil_moisture.shift();
-      sensorData.timestamps.shift();
-    }
-
-    return res.status(200).json({ message: 'Data received' });
-  } else if (req.method === 'GET') {
-    return res.status(200).json(sensorData);
-  } else {
-    res.setHeader('Allow', ['GET', 'POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-}
-```
-
-## Transmitting the Data
-### Wireless and Transport Protocols
-- **WiFi**: The ESP32 connects to a local WiFi network to transmit data.
-- **HTTP**: Data is sent to the server using HTTP POST requests.
-- **Data Frequency**: Data is sent every 2 seconds to ensure real-time monitoring.
 
 ## Presenting the Data
-### Dashboard
-The dashboard is built using Next.js and displays real-time sensor data using Chart.js for visual representation. Data is updated every 2 seconds.
+The dashboard is built using React and displays real-time data from the sensors. Data is preserved in a MongoDB database and fetched every 2 seconds for the dashboard.
 
-**Home Page (app/page.tsx)**
-```typescript
-'use client';
+![Dashboard](/public/dashboard.png)
 
-import { useState, useEffect } from 'react';
-import PlantGrid from './components/PlantGrid';
-import PlantDetails from './components/PlantDetails';
-
-interface SensorData {
-  temp: number;
-  humidity: number;
-  light: number;
-  soil_moisture: number;
-}
-
-export default function Home() {
-  const [selectedPlant, setSelectedPlant] = useState<number | null>(null);
-  const [data, setData] = useState<SensorData | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/api/sensor-data');
-      const result: SensorData = await response.json();
-      setData(result);
-    };
-
-    fetchData();
-    const interval = setInterval(fetchData, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleSelectPlant = (id: number) => {
-    setSelectedPlant(id);
-  };
-
-  if (selectedPlant === 1 && data) {
-    return <PlantDetails data={data} plant={{ id: 1, name: 'Plant 1', src: '/plant1.svg' }} />;
-  }
-
-  return (
-    <div>
-      <PlantGrid onSelect={handleSelectPlant} />
-    </div>
-  );
-}
-```
-
-### Data Storage
-- **Database**: Data is temporarily stored in-memory on the server and could be extended to use a database like MongoDB for persistent storage.
+**Database Choice:**
+- **MongoDB**: Chosen for its scalability and efficiency in handling large volumes of time-series data.
 
 ## Finalizing the Design
-### Results
-The Smart Grow House Monitor successfully provides real-time monitoring and control of the grow house environment. It allows users to adjust lighting and watering schedules based on the data collected.
+The final project successfully monitors and controls the grow house environment, providing valuable data and automation. Future improvements could include calculating and implementing a cloud-based dashboard for remote monitoring. Additionally, enhancements could be made in calculating the power requirements to ensure the system operates independently without being connected to a computer. It would also be beneficial to configure how frequently the system reads data, saves data to the database, and other related parameters to optimize performance and resource utilization.
 
-### Pictures
-Include pictures of the setup and screenshots of the web interface.
 
-### Final Thoughts
-The project went well, with real-time data monitoring and control functioning as expected. Future improvements could include integrating additional sensors, enhancing the web interface, and deploying the system to a cloud platform for remote access.
-
-### Video Presentation
-(Optional) Include a video demonstrating the project setup and functionality.
+---
