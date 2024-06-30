@@ -144,5 +144,6 @@ The dashboard is built using React and displays real-time data from the sensors.
 ## Finalizing the Design
 The final project successfully monitors and controls the grow house environment, providing valuable data and automation. Future improvements could include calculating and implementing a cloud-based dashboard for remote monitoring. Additionally, enhancements could be made in calculating the power requirements to ensure the system operates independently without being connected to a computer. It would also be beneficial to configure how frequently the system reads data, saves data to the database, and other related parameters to optimize performance and resource utilization.
 
+![Prototype](/public/pic.png)
 
 ---
