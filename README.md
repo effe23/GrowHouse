@@ -108,6 +108,12 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/mydatabase?
 - **Local Hosting**: The dashboard is hosted locally for this project, but it can be scaled to a cloud-based solution in the future.
 - **Database**: Data is stored in a MongoDB instance, which allows for efficient querying and storage of time-series data.
 
+### Code
+
+- [Raspberry Pi Pico W Script](https://github.com/effe23/GrowHouse/blob/main/Growhouse.py)
+- [Next.js API Endpoint](https://github.com/effe23/GrowHouse/blob/main/pages/api/sensor-data.ts)
+- [Next.js Dashboard Component](https://github.com/effe23/GrowHouse/blob/main/app/components/PlantDetails.tsx)
+
 ### Transmitting the Data / Connectivity
 
 **How is the data transmitted to the internet or local server?**
