@@ -1,0 +1,33 @@
+.
+├── README.md
+├── app
+│   ├── components
+│   │   ├── Footer.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── LineChart.tsx
+│   │   ├── PlantDetails.tsx
+│   │   └── PlantGrid.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── pages
+│   └── api
+│       ├── control-led.ts
+│       ├── control-pump.ts
+│       ├── send-email.ts
+│       └── sensor-data.ts
+├── postcss.config.mjs
+├── project_structure.txt
+├── public
+│   ├── greenhouse-icon.svg
+│   ├── plant1.svg
+│   ├── plant2.svg
+│   ├── plant3.svg
+│   └── watering-can-icon.svg
+├── tailwind.config.ts
+└── tsconfig.json
+
