@@ -1,5 +1,5 @@
 
-# Building a Smart Grow House Monitor using Raspberry Pi Pico W
+# Smart Grow House
 
 **Name:** Efthimis, ek223yb
 
