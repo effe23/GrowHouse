@@ -4,9 +4,15 @@
 **Name:** Efthimis, ek223yb
 
 ---
+<div style="text-align: center;">
+  <img src="public/water.gif" alt="gif" width="300" height="300">
+</div>
 
 ## Project Overview
 This project creates a smart grow house monitor using a Raspberry Pi Pico W. It monitors temperature, humidity, light intensity, and soil moisture, automating watering and displaying data on a Next.js dashboard for real-time monitoring. Approximately 5-7 hours to complete.
+
+
+
 
 ## Objective
 
