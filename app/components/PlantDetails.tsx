@@ -76,7 +76,7 @@ const checkSoilMoisture = async (soilMoisture: number, pumpStatus: string) => {
 
 export default function PlantDetails({ plant, data }: PlantDetailsProps) {
   const [ledStatus, setLedStatus] = useState({ red: 0, green: 0, blue: 0 });
-  const [pumpStatus, setPumpStatus] = useState(data ? data.pump_status : 'OFF');
+  const [pumpStatus, setPumpStatus] = useState(data.pump_status);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   useEffect(() => {
@@ -139,7 +139,9 @@ export default function PlantDetails({ plant, data }: PlantDetailsProps) {
     }
   };
 
-  if (!data) return <div>Loading...</div>;
+  if (!data || !data.temp || !data.humidity || !data.light || !data.soil_moisture || !data.timestamps) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="hero min-h-screen bg-base-200 flex flex-col items-center justify-center">

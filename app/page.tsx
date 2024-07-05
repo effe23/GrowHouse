@@ -14,22 +14,23 @@ interface SensorData {
 
 export default function Home() {
   const [selectedPlant, setSelectedPlant] = useState<number | null>(null);
-  const [data, setData] = useState<SensorData | null>({
-    temp: [],
-    humidity: [],
-    light: [],
-    soil_moisture: [],
-    timestamps: [],
-    pump_status: 'OFF',
-  });
+  const [data, setData] = useState<SensorData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/api/sensor-data');
         if (response.ok) {
-          const result: SensorData = await response.json();
-          setData(result);
+          const result = await response.json();
+          const transformedData: SensorData = {
+            temp: result.map((item: any) => item.temp),
+            humidity: result.map((item: any) => item.humidity),
+            light: result.map((item: any) => item.light),
+            soil_moisture: result.map((item: any) => item.soil_moisture),
+            timestamps: result.map((item: any) => item.timestamp),
+            pump_status: result[0].pump_status, // Assuming pump_status is the same for all entries
+          };
+          setData(transformedData);
         } else {
           console.error('Failed to fetch data:', response.statusText);
         }
@@ -47,6 +48,10 @@ export default function Home() {
   const handleSelectPlant = (id: number) => {
     setSelectedPlant(id);
   };
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   if (selectedPlant === 1 && data) {
     return <PlantDetails data={data} plant={{ id: 1, name: 'Plant 1', src: '/plant1.svg' }} />;
